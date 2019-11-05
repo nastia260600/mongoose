@@ -29,7 +29,8 @@ app.use(function (req, res, next) {
 
 app.use(function (err, req, res, next) {
     res.status(err.status || 500);
-    log.error('Internal error(%d): %s', res.statusCode, err.message); res.send({ error: err.message });
+    log.error('Internal error(%d): %s', res.statusCode, err.message); 
+    res.send({ error: err.message });
     return;
 });
 
@@ -46,8 +47,7 @@ app.get('/api/articles', function (req, res) {
             return res.send(articles);
         } else {
             res.statusCode = 500;
-            log.error('Internal error(%d): %s',
-                res.statusCode, err.message);
+            log.error('Internal error(%d): %s', res.statusCode, err.message);
             return res.send({ error: 'Server error' });
         }
     });
@@ -138,8 +138,7 @@ app.delete('/api/articles/:id', function (req, res) {
                 return res.send({ status: 'OK' });
             } else {
                 res.statusCode = 500;
-                log.error('Internal error(%d): %s',
-                    res.statusCode, err.message);
+                log.error('Internal error(%d): %s', res.statusCode, err.message);
                 return res.send({ error: 'Server error' });
             }
         });
